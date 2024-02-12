@@ -14,10 +14,10 @@ function NewTaskForm() {
   function handleSubmit(event){
     event.preventDefault()
   }
-    const formData={
+    const formData=[{
       text:formText,
       category:formCategory
-    }
+    }]
   
    const allData=[...formData,submittedData]
    setSubmittedData(allData)
