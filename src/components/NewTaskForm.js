@@ -1,7 +1,8 @@
 import React,{useState} from "react";
 //import App from "./App";
 import { TASKS } from "../data";
-function NewTaskForm() {
+
+function NewTaskForm({categories,onTaskFormSubmit}) {
   const [formText,setFormText]=useState({text:""})
   const [formCategory,setFormCategory]=useState({category:""})
   const [submittedData,setSubmittedData]=useState([])
@@ -11,9 +12,7 @@ function NewTaskForm() {
   //function handleChange1(event){
    // setFormCategory(event.target.value)
  // }
-  function handleSubmit(event){
-    event.preventDefault()
-  }
+  
     const formData=[{
       text:formText,
       category:formCategory
@@ -26,7 +25,7 @@ function NewTaskForm() {
   
    const  allSubmissions=submittedData.map((index,data)=>{
     return(
-      <div key={index}>{data.text} {data.category}</div>
+      <div key={index}>{data.text} </div>
     )
    })
   
@@ -48,16 +47,16 @@ function NewTaskForm() {
   </option>}
   return (
   <div>
-    <form className="new-task-form" onSubmit={handleSubmit}>
+    <form className="new-task-form" onSubmit={()=>onTaskFormSubmit(formText)} >
       <label>
         Details
-        <input type="text" name="text" onChange={handleChange}/>
+        <input type="text" name="text" onChange={handleChange} value={formText}/>
       </label>
       <label>
         Category
         <select name="category" onClick={tasksCat}>
           {/* render <option> elements for each category here */}
-          
+          <option>{categories}</option>
         </select>
       </label>
       <input type="submit" onClick={handleChange}  value={formData.AddTask} />
