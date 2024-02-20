@@ -54,7 +54,7 @@ function NewTaskForm({categories,onTaskFormSubmit}) {
       </label>
       <label>
         Category
-        <select name="category" onClick={tasksCat}>
+        <select name="category" onChange={tasksCat}>
           {/* render <option> elements for each category here */}
           <option>{categories}</option>
         </select>
