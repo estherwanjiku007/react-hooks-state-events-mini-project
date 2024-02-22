@@ -9,6 +9,9 @@ function CategoryFilter({categories}) {
   function isOnClicked(){
     setIsClicked((isClicked)=>!isClicked)
   }
+  const  handleChange=(event)=>{
+    setFilterBy(event.target.value)
+  }
   if(isClicked){
     const theCat="selected"
     setMyCat(theCat)
@@ -29,8 +32,8 @@ function CategoryFilter({categories}) {
     <div className="categories">
       <h5>Category filters</h5>
       {/* render <button> elements for each category here */}
-      <span>{categories}
-    <button key={categories} className={mycategory} onClick={isOnClicked(!isClicked)}>{categories}</button>
+      <span onChange={handleChange}>{categories }
+    <button key={categories} className={mycategory} onClick={setIsClicked(!isClicked)}>{categories}</button>
     </span>
     {filteredItems.map((item)=>
     <ul key={item}>{ item}</ul>

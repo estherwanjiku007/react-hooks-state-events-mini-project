@@ -1,7 +1,7 @@
 import React from "react";
 //import {TASKS} from "../data"
 function Task({myTask}) {
- // console.log(myTask) 
+ //console.log(myTask) 
   const deleteTask=(aText)=>{
     myTask.text.filter((task)=>aText!==task)
   }

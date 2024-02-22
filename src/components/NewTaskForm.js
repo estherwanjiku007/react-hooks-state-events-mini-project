@@ -2,66 +2,56 @@ import React,{useState} from "react";
 //import App from "./App";
 import { TASKS } from "../data";
 
-function NewTaskForm({categories,onTaskFormSubmit}) {
+function NewTaskForm({categories,onTaskFormSubmit,myData}) {
+  console.log(categories,myData)
   const [formText,setFormText]=useState({text:""})
-  const [formCategory,setFormCategory]=useState({category:""})
+  const [selectedCategory,setSelectedCategory]=useState("ALL")
+  //const [formCategory,setFormCategory]=useState({category:""})
   const [submittedData,setSubmittedData]=useState([])
   function handleChange(event){
     setFormText(event.target.value)
   }
+  function  handleCategoryChange(event){
+    setSelectedCategory(event.target.value)
+  }
   //function handleChange1(event){
    // setFormCategory(event.target.value)
- // }
+ // }  
+    
   
-    const formData=[{
-      text:formText,
-      category:formCategory
-    }]
-  
-   const allData=[...formData,submittedData]
+   const allData=[...myData,submittedData]
    setSubmittedData(allData)
    setFormText("")
-   setFormCategory("")
+   //setFormCategory("")
+   const handleSubmit=(event)=>{
+    event.prevevtDefault()
+    onTaskFormSubmit(formText)
+  }
   
-   const  allSubmissions=submittedData.map((index,data)=>{
-    return(
-      <div key={index}>{data.text} </div>
-    )
+   const allSubmissions=myData.filter((data)=>{
+    if(selectedCategory==="ALL")return true
+    return data.category===selectedCategory
    })
   
- /* const [formData2,setFormData2]=useState()
-    function onTaskFormSubmit({Task}){
-      setFormData2(Task)
-     (<li id={TASKS.length}>{TASKS}.filter((Task,id){
-      TASKS.text=Task
-     <Task ? id===Task.id :"" />
-})
-</li>  )
-}*/
-  function tasksCat(){
-    <option>{TASKS.map(()=>{
-     return (
-        <TASKS.category/>        
-      )
-    })}
-  </option>}
   return (
   <div>
-    <form className="new-task-form" onSubmit={()=>onTaskFormSubmit(formText)} >
+    <form className="new-task-form" onSubmit={handleSubmit} >
       <label>
         Details
-        <input type="text" name="text" onChange={handleChange} value={formText}/>
+        <input type="text" name="text"  value={formText} onChange={handleChange}/>
       </label>
       <label>
         Category
-        <select name="category" onChange={tasksCat}>
+        <select name="category" >
           {/* render <option> elements for each category here */}
-          <option>{categories}</option>
+          <option onChange={handleCategoryChange}>{categories}</option>
         </select>
       </label>
-      <input type="submit" onClick={handleChange}  value={formData.AddTask} />
+      
     </form>
-    <h3>{allSubmissions}</h3>
+    {allSubmissions.map((sub)=>(
+        <li>{sub.text}</li>
+    ))}
   </div>  
   );
 }

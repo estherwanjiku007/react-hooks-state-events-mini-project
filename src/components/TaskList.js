@@ -4,12 +4,12 @@ import Task from "./Task";
 
 ;
 function TaskList({tasks}) {   
-//  console.log(tasks)
+ //console.log(tasks)
   
   return (
     <div className="tasks">      
         <Task myTask={tasks}/>
-      <button >x</button>
+     
     </div>
   );
 }

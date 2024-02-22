@@ -8,7 +8,7 @@ console.log("Here's the data you're working with");
 console.log({ CATEGORIES, TASKS });
 
 function App() {
-  const [allTasks,setTasks]=useState([TASKS.category])
+  const [allTasks,setTasks]=useState(TASKS)
   const onTaskFormSubmit=(value)=>{
        setTasks=[...allTasks,value]
   }
@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter categories={CATEGORIES}/>
-      <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={onTaskFormSubmit} />
+      <NewTaskForm categories={CATEGORIES} myData={allTasks} onTaskFormSubmit={onTaskFormSubmit} />
       <TaskList tasks={TASKS} />
     </div>
   );
